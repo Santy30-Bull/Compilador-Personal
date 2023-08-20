@@ -70,6 +70,14 @@ public class Parser
             {
                 Console.WriteLine($"Found right brace: {currentToken.Lexeme}");
             }
+            else if (currentToken.Type == TokenType.SEMICOLON)
+            {
+                Console.WriteLine($"Found semicolon: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.PLUS)
+            {
+                Console.WriteLine($"Found plus operator: {currentToken.Lexeme}");
+            }
             else
             {
                 Console.WriteLine($"Found illegal token: {currentToken.Lexeme} ");

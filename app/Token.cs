@@ -16,6 +16,8 @@ public enum TokenType
     RPAREN,
     RBRACE,
     LBRACE,
+    SEMICOLON,
+    PLUS,
     EOF
 }
 
@@ -26,6 +28,7 @@ public class Token
 
     public Token(TokenType type, string lexeme)
     {
+        
         Type = type;
         Lexeme = lexeme;
     }

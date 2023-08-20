@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj": {}
+    "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj": {}
   },
   "projects": {
-    "c:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj": {
+    "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj",
+        "projectUniqueName": "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj",
         "projectName": "app",
-        "projectPath": "c:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj",
+        "projectPath": "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\app.csproj",
         "packagesPath": "C:\\Users\\SANTY\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\obj\\",
+        "outputPath": "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SANTY\\AppData\\Roaming\\NuGet\\NuGet.Config"

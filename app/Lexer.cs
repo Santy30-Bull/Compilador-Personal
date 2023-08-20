@@ -19,6 +19,8 @@ public class Lexer
 
     public Token NextToken()
     {
+        saltarEspacioBlanco();
+
         if (position >= input.Length)
             return new Token(TokenType.EOF, "");
 
@@ -90,6 +92,16 @@ public class Lexer
             Advance();
             return new Token(TokenType.RBRACE, "}");
         }
+        else if (currentChar == ';')
+        {
+            Advance();
+            return new Token(TokenType.SEMICOLON, ";");
+        }
+        else if (currentChar == '+')
+        {
+            Advance();
+            return new Token(TokenType.PLUS, "+");
+        }
         else
         {
             Advance();
@@ -100,5 +112,10 @@ public class Lexer
     private void Advance()
     {
         position++;
+    }
+    public void saltarEspacioBlanco()
+    {
+        while (CurrentChar == ' ' || CurrentChar == '\t' || CurrentChar == '\n' || CurrentChar == '\r')
+            Advance();
     }
 }
