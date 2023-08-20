@@ -22,6 +22,8 @@ public enum TokenType
     LTE,
     GTE,
     ASSING,
+    COMMA,
+    MINUS,
     EOF
 }
 

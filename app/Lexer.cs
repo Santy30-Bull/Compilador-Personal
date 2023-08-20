@@ -123,6 +123,16 @@ public class Lexer
             Advance();
             return new Token(TokenType.NEGATION, "!");
         }
+        else if (currentChar == ',')
+        {
+            Advance();
+            return new Token(TokenType.COMMA, ",");
+        }
+        else if (currentChar == '-')
+        {
+            Advance();
+            return new Token(TokenType.MINUS, "-");
+        }
         else
         {
             Advance();

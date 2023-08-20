@@ -7,11 +7,13 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.WriteLine("Bienvenido al analizador léxico"); 
+
         while (true)
         {
             Console.Write(">> ");
             string input = Console.ReadLine() ?? ""; // Si Console.ReadLine() devuelve null, asigna una cadena vacía
-           
+
             if (string.IsNullOrWhiteSpace(input))
                 break;
 

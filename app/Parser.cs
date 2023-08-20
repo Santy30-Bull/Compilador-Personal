@@ -94,6 +94,14 @@ public class Parser
             {
                 Console.WriteLine($"Found assignment operator: {currentToken.Lexeme}");
             }
+            else if (currentToken.Type == TokenType.COMMA)
+            {
+                Console.WriteLine($"Found comma: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.MINUS)
+            {
+                Console.WriteLine($"Found minus operator: {currentToken.Lexeme}");
+            }
             else
             {
                 Console.WriteLine($"Found illegal token: {currentToken.Lexeme} ");
