@@ -80,6 +80,16 @@ public class Lexer
             Advance();
             return new Token(TokenType.RPAREN, ")");
         }
+        else if (currentChar == '{')
+        {
+            Advance();
+            return new Token(TokenType.LBRACE, "{");
+        }
+        else if (currentChar == '}')
+        {
+            Advance();
+            return new Token(TokenType.RBRACE, "}");
+        }
         else
         {
             Advance();
