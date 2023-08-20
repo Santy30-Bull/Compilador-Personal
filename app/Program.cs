@@ -10,8 +10,8 @@ class Program
         while (true)
         {
             Console.Write(">> ");
-            string input = Console.ReadLine();
-
+            string input = Console.ReadLine() ?? ""; // Si Console.ReadLine() devuelve null, asigna una cadena vacía
+           
             if (string.IsNullOrWhiteSpace(input))
                 break;
 

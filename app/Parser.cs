@@ -78,6 +78,22 @@ public class Parser
             {
                 Console.WriteLine($"Found plus operator: {currentToken.Lexeme}");
             }
+            else if (currentToken.Type == TokenType.NEGATION)
+            {
+                Console.WriteLine($"Found Negation operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.LTE)
+            {
+                Console.WriteLine($"Found less-than-equals operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.GTE)
+            {
+                Console.WriteLine($"Found greater-than-equals operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.ASSING)
+            {
+                Console.WriteLine($"Found assignment operator: {currentToken.Lexeme}");
+            }
             else
             {
                 Console.WriteLine($"Found illegal token: {currentToken.Lexeme} ");

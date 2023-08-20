@@ -18,6 +18,10 @@ public enum TokenType
     LBRACE,
     SEMICOLON,
     PLUS,
+    NEGATION,
+    LTE,
+    GTE,
+    ASSING,
     EOF
 }
 

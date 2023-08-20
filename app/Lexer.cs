@@ -9,6 +9,7 @@ public class Lexer
     private readonly string input;
     private int position;
 
+
     public Lexer(string input)
     {
         this.input = input;
@@ -47,6 +48,11 @@ public class Lexer
         else if (currentChar == '=')
         {
             Advance();
+            if (CurrentChar == '=')
+            {
+                Advance();
+                return new Token(TokenType.ASSING, "==");
+            }
             return new Token(TokenType.Equals, "=");
         }
         else if (char.IsLetter(currentChar))
@@ -65,11 +71,21 @@ public class Lexer
         else if (currentChar == '<')
         {
             Advance();
+            if (CurrentChar == '=')
+            {
+                Advance();
+                return new Token(TokenType.LTE, "<=");
+            }
             return new Token(TokenType.LT, "<");
-        }
+        } 
         else if (currentChar == '>')
         {
             Advance();
+            if (CurrentChar == '=')
+            {
+                Advance();
+                return new Token(TokenType.GTE, ">=");
+            }
             return new Token(TokenType.GT, ">");
         }
         else if (currentChar == '(')
@@ -102,6 +118,11 @@ public class Lexer
             Advance();
             return new Token(TokenType.PLUS, "+");
         }
+        else if (currentChar == '!')
+        {
+            Advance();
+            return new Token(TokenType.NEGATION, "!");
+        }
         else
         {
             Advance();
@@ -118,4 +139,19 @@ public class Lexer
         while (CurrentChar == ' ' || CurrentChar == '\t' || CurrentChar == '\n' || CurrentChar == '\r')
             Advance();
     }
+    /*public string escogerCaracter()
+    {
+        char currentChar = CurrentChar;
+        string caracter = currentChar.ToString();
+        return caracter;
+    }
+    
+    public Token juntarCaracteres(TokenType tipo)
+    {
+        string caracter = escogerCaracter();
+        string caracter2 = CurrentChar.ToString();
+        string juntos = caracter + caracter2;
+        Advance();
+        return new Token(tipo, juntos);
+    } */
 }
