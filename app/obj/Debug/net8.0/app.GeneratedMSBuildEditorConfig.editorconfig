@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = app
-build_property.ProjectDir = C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\
+build_property.ProjectDir = c:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

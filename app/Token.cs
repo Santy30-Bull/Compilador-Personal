@@ -14,6 +14,8 @@ public enum TokenType
     GT,
     LPAREN,
     RPAREN,
+    RBRACE,
+    LBRACE,
     EOF
 }
 

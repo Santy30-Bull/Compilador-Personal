@@ -62,6 +62,14 @@ public class Parser
             {
                 Console.WriteLine($"Found right parenthesis: {currentToken.Lexeme}");
             }
+            else if (currentToken.Type == TokenType.LBRACE)
+            {
+                Console.WriteLine($"Found left brace: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.RBRACE)
+            {
+                Console.WriteLine($"Found right brace: {currentToken.Lexeme}");
+            }
             else
             {
                 Console.WriteLine($"Found illegal token: {currentToken.Lexeme} ");
