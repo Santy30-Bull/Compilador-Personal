@@ -60,9 +60,30 @@ public class Lexer
 
             return new Token(TokenType.Identifier, identifier);
         }
+        else if (currentChar == '<')
+        {
+            Advance();
+            return new Token(TokenType.LT, "<");
+        }
+        else if (currentChar == '>')
+        {
+            Advance();
+            return new Token(TokenType.GT, ">");
+        }
+        else if (currentChar == '(')
+        {
+            Advance();
+            return new Token(TokenType.LPAREN, "(");
+        }
+        else if (currentChar == ')')
+        {
+            Advance();
+            return new Token(TokenType.RPAREN, ")");
+        }
         else
         {
-            throw new Exception("Unexpected character: " + currentChar);
+            Advance();
+            return new Token(TokenType.Illegal, currentChar.ToString());
         }
     }
 

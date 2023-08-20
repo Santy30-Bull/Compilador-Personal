@@ -40,11 +40,31 @@ public class Parser
             }
             else if (currentToken.Type == TokenType.And)
             {
-                Console.WriteLine($"Found AND operator");
+                Console.WriteLine($"Found AND operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.Equals)
             {
-                Console.WriteLine($"Found equals operator");
+                Console.WriteLine($"Found equals operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.LT)
+            {
+                Console.WriteLine($"Found less-than operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.GT)
+            {
+                Console.WriteLine($"Found greater-than operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.LPAREN)
+            {
+                Console.WriteLine($"Found left parenthesis: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type == TokenType.RPAREN)
+            {
+                Console.WriteLine($"Found right parenthesis: {currentToken.Lexeme}");
+            }
+            else
+            {
+                Console.WriteLine($"Found illegal token: {currentToken.Lexeme} ");
             }
 
             currentToken = lexer.NextToken();

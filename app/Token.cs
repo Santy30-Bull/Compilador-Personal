@@ -9,6 +9,11 @@ public enum TokenType
     IntegerLiteral,
     Equals,
     And,
+    Illegal,
+    LT,
+    GT,
+    LPAREN,
+    RPAREN,
     EOF
 }
 

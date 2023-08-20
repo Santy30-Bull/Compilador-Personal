@@ -12,3 +12,18 @@ C:\Users\pedro\Desktop\app\obj\Debug\net8.0\refint\app.dll
 C:\Users\pedro\Desktop\app\obj\Debug\net8.0\app.pdb
 C:\Users\pedro\Desktop\app\obj\Debug\net8.0\app.genruntimeconfig.cache
 C:\Users\pedro\Desktop\app\obj\Debug\net8.0\ref\app.dll
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\bin\Debug\net8.0\app.exe
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\bin\Debug\net8.0\app.deps.json
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\bin\Debug\net8.0\app.runtimeconfig.json
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\bin\Debug\net8.0\app.dll
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\bin\Debug\net8.0\app.pdb
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.AssemblyInfoInputs.cache
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.AssemblyInfo.cs
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.csproj.CoreCompileInputs.cache
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.sourcelink.json
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.dll
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\refint\app.dll
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.pdb
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\app.genruntimeconfig.cache
+C:\Users\SANTY\OneDrive\Escritorio\Lenguaje y compiladores\Compilador-Personal\app\obj\Debug\net8.0\ref\app.dll
