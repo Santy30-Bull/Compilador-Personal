@@ -1,8 +1,10 @@
 # Compilador-Personal
-Para poder ejecutar correctamente el codigo, se necesitan descargar unas serie de cosas antes: 
-1. Tener instalado el .NET 8, no sirve si tienes release anteriores al 8
-2. En Visual studio code, tienes que tener las extensiones de C# y C# Dev Kit instaladas
-   
-Una vez tengas estas cosas, estas listo para ejecutar el codigo. Ejecutaremos el codigo desde la terminal de visual studio code (Tambien se puede en la cmd de windows)
-cuando estemos en la terminal de visual, le daremos la siguiente instrucción: dotnet run. Esto ejecutara el main del programa, esperas unos segundos y te aparecera el mensaje de bienvenida,
-aqui ya puedes empezar a probar diferentes configuraciones. 
+Para lograr una ejecución exitosa del código, es necesario realizar algunas preparaciones previas:
+
+Asegúrate de tener instalado .NET 8; versiones anteriores al 8 no son compatibles.
+En Visual Studio Code, es importante contar con las extensiones de C# y C# Dev Kit debidamente instaladas.
+Una vez hayas cumplido con estos requisitos, estarás listo para ejecutar el código. La ejecución se lleva a cabo a través de la terminal de Visual Studio Code o incluso en la línea de comandos de Windows (cmd).
+
+Una vez te encuentres en este punto, sigue las siguientes instrucciones: ejecuta el comando "dotnet run" (es importante estar ubicado en la carpeta 'app' para que la instrucción se ejecute correctamente). Esto dará inicio al funcionamiento principal del programa. Tras esperar unos momentos, verás aparecer el mensaje de bienvenida.
+
+A partir de este punto, estarás listo para comenzar a experimentar con diversas configuraciones y explorar las funcionalidades del programa.
