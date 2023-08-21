@@ -8,3 +8,5 @@ Una vez hayas cumplido con estos requisitos, estarás listo para ejecutar el có
 Una vez te encuentres en este punto, sigue las siguientes instrucciones: ejecuta el comando "dotnet run" (es importante estar ubicado en la carpeta 'app' para que la instrucción se ejecute correctamente). Esto dará inicio al funcionamiento principal del programa. Tras esperar unos momentos, verás aparecer el mensaje de bienvenida.
 
 A partir de este punto, estarás listo para comenzar a experimentar con diversas configuraciones y explorar las funcionalidades del programa.
+
+Integrantes: Santiago Augusto Toro Bonilla, Pedro Juan Henao y Alfonso Escobar Silva
