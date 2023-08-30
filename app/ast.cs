@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using static app.Token;
 public abstract class ASTNode
 {
     public abstract string TokenLiteral();
@@ -10,7 +10,6 @@ public abstract class ASTNode
 public class Statement : ASTNode
 {
     private Token token;
-
     public Statement(Token token)
     {
         this.token = token;
