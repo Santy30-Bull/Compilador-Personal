@@ -1,76 +1,77 @@
+using System;
 using System.Collections.Generic;
 
-    public abstract class ASTNode
+public abstract class ASTNode
+{
+    public abstract string TokenLiteral();
+    public abstract override string ToString();
+}
+
+public class Statement : ASTNode
+{
+    private Token token;
+
+    public Statement(Token token)
     {
-        public abstract string TokenLiteral();
-        public abstract override string ToString();
+        this.token = token;
     }
 
-    public class Statement : ASTNode
+    public override string TokenLiteral()
     {
-        private Token token;
-
-        public Statement(Token token)
-        {
-            this.token = token;
-        }
-
-        public override string TokenLiteral()
-        {
-            return token.Literal;
-        }
-
-        public override string ToString()
-        {
-            return TokenLiteral();
-        }
+        return token.Lexeme;  // Corregido: usar Lexeme en lugar de Literal
     }
 
-    public class Expression : ASTNode
+    public override string ToString()
     {
-        private Token token;
+        return TokenLiteral();
+    }
+}
 
-        public Expression(Token token)
-        {
-            this.token = token;
-        }
+public class Expression : ASTNode
+{
+    private Token token;
 
-        public override string TokenLiteral()
-        {
-            return token.Literal;
-        }
-
-        public override string ToString()
-        {
-            return TokenLiteral();
-        }
+    public Expression(Token token)
+    {
+        this.token = token;
     }
 
-    public class Program : ASTNode
+    public override string TokenLiteral()
     {
-        private List<Statement> statements;
-
-        public Program(List<Statement> statements)
-        {
-            this.statements = statements;
-        }
-
-        public override string TokenLiteral()
-        {
-            if (statements.Count > 0)
-            {
-                return statements[0].TokenLiteral();
-            }
-            return "";
-        }
-
-        public override string ToString()
-        {
-            List<string> outList = new List<string>();
-            foreach (Statement statement in statements)
-            {
-                outList.Add(statement.ToString());
-            }
-            return string.Join("", outList);
-        }
+        return token.Lexeme;  // Corregido: usar Lexeme en lugar de Literal
     }
+
+    public override string ToString()
+    {
+        return TokenLiteral();
+    }
+}
+
+public class Progra : ASTNode
+{
+    private List<Statement> statements;
+
+    public Progra(List<Statement> statements)
+    {
+        this.statements = statements;
+    }
+
+    public override string TokenLiteral()
+    {
+        if (statements.Count > 0)
+        {
+            return statements[0].TokenLiteral();
+        }
+        return "";
+    }
+
+    public override string ToString()
+    {
+        List<string> outList = new List<string>();
+        foreach (Statement statement in statements)
+        {
+            outList.Add(statement.ToString());
+        }
+        return string.Join("", outList);
+    }
+}
