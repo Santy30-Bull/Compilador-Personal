@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using static Token;
+using static TokenType;
 
 public class Lexer
 {
@@ -149,7 +151,7 @@ public class Lexer
         while (CurrentChar == ' ' || CurrentChar == '\t' || CurrentChar == '\n' || CurrentChar == '\r')
             Advance();
     }
-    /*public string escogerCaracter()
+    public string escogerCaracter()
     {
         char currentChar = CurrentChar;
         string caracter = currentChar.ToString();
@@ -163,5 +165,5 @@ public class Lexer
         string juntos = caracter + caracter2;
         Advance();
         return new Token(tipo, juntos);
-    } */
+    } 
 }

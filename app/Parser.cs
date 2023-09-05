@@ -2,6 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Token;
+using static TokenType;
+using static ASTNode;
+using static Statement;
+using static Expression;
+using static Progra;
+using static Lexer;
+using static Parser;
+
+
 
 public class Parser
 {
@@ -101,6 +111,10 @@ public class Parser
             else if (currentToken.Type == TokenType.MINUS)
             {
                 Console.WriteLine($"Found minus operator: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.IF)
+            {
+                Console.WriteLine($"found if statement: {currentToken.Lexeme}");
             }
             else
             {
