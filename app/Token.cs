@@ -68,3 +68,30 @@ public class Token
 }
 }
 
+//otra forma de hacer el metodo de lookup_token_type, sin tener que meterlo dentro de la clase token
+/*
+public class TokenHelper
+{
+    public static TokenType lookup_token_type(string literal)
+    {
+        var keywords = new Dictionary<string, TokenType>
+        {
+            {"verdadero", TokenType.TRUE},
+            {"falso", TokenType.FALSE},
+            {"procedimiento", TokenType.FUNCTION},
+            {"regresa", TokenType.RETURN},
+            {"si", TokenType.IF},
+            {"si_no", TokenType.ELSE},
+            {"variable", TokenType.LET},
+        };
+
+        if (keywords.ContainsKey(literal))
+        {
+            return keywords[literal];
+        }
+
+        return TokenType.Identifier;
+    }
+}
+*/
+

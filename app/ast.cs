@@ -50,11 +50,11 @@ public class Expression : ASTNode
     }
 }
 
-public class Progra : ASTNode
+public class Program : ASTNode
 {
     public List<Statement> Statements { get; }
 
-    public Progra(List<Statement> statements)
+    public Program(List<Statement> statements)
     {
         Statements = statements;
     }

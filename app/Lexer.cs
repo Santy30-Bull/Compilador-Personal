@@ -10,14 +10,18 @@ public class Lexer
 {
     private readonly string input;
     private int position;
+    private char _character;
+    private int _readPosition;
 
 
-    public Lexer(string input)
-    {
-        this.input = input;
-        position = 0;
-    }
-
+ public Lexer(string input)
+{
+    this.input = input;
+    position = 0;
+    _character = '\0';      // Inicializar _character
+    _readPosition = 0;      // Inicializar _readPosition
+    ReadCharacter();        // Llamar al método ReadCharacter para leer el primer carácter
+}
     private char CurrentChar => position < input.Length ? input[position] : '\0';
 
     public Token NextToken()
@@ -142,28 +146,76 @@ public class Lexer
         }
     }
 
+    private bool EsLetra(char character)
+    {
+        return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
+    }
+
+    private bool EsNumero(char character)
+    {
+        return char.IsDigit(character);
+    }
+
     private void Advance()
     {
         position++;
     }
+
     public void saltarEspacioBlanco()
     {
         while (CurrentChar == ' ' || CurrentChar == '\t' || CurrentChar == '\n' || CurrentChar == '\r')
             Advance();
     }
+
     public string escogerCaracter()
     {
         char currentChar = CurrentChar;
         string caracter = currentChar.ToString();
         return caracter;
     }
-    
-    public Token juntarCaracteres(TokenType tipo)
+    private void ReadCharacter()
     {
-        string caracter = escogerCaracter();
-        string caracter2 = CurrentChar.ToString();
-        string juntos = caracter + caracter2;
-        Advance();
-        return new Token(tipo, juntos);
-    } 
+        if (_readPosition >= input.Length)
+        {
+            _character = '\0'; // Fin de archivo
+        }
+        else
+        {
+            _character = input[_readPosition];
+        }
+
+        position = _readPosition;
+        _readPosition++;
+    }
+
+    private string ReadIdentifier()
+    {
+        int initialPosition = position;
+
+        while (EsLetra(_character))
+        {
+            ReadCharacter();
+        }
+
+        return input.Substring(initialPosition, position - initialPosition);
+    }
+    private string ReadNumber()
+    {
+        int initialPosition = position;
+
+        while (EsNumero(_character))
+        {
+            ReadCharacter();
+        }
+
+        return input.Substring(initialPosition, position - initialPosition);
+    }
+    private Token MakeTwoCharacterToken(TokenType tokenType)
+    {
+        char prefix = _character;
+        ReadCharacter();
+        char suffix = _character;
+        Token token = new Token(tokenType, prefix.ToString() + suffix.ToString());
+        return token;
+    }
 }
