@@ -29,9 +29,10 @@ public enum TokenType
     FALSE,
     FUNCTION,
     RETURN,
+    SLASH,
     IF,
-    ELSE,
-    LET
+    MULTIPLICATION,
+    ELSE
 }
 
 public class Token
@@ -41,31 +42,32 @@ public class Token
 
     public Token(TokenType type, string lexeme)
     {
-        
         Type = type;
         Lexeme = lexeme;
     }
 
+
+    //Esta son las palabras reservadas, podemos agregar mas si queremos 
     public static TokenType lookup_token_type(string literal)
-{
-    var keywords = new Dictionary<string, TokenType>
     {
-        {"verdadero", TokenType.TRUE},
-        {"falso", TokenType.FALSE},
-        {"procedimiento", TokenType.FUNCTION},
-        {"regresa", TokenType.RETURN},
-        {"si", TokenType.IF},
-        {"si_no", TokenType.ELSE},
-        {"variable", TokenType.LET},
-    };
+        var keywords = new Dictionary<string, TokenType>
+        {
+            {"szs", TokenType.TRUE},
+            {"nel", TokenType.FALSE},
+            {"procedimiento", TokenType.FUNCTION},
+            {"regresa", TokenType.RETURN},
+            {"si", TokenType.IF},
+            {"sino", TokenType.ELSE},
+            //{"variable", TokenType.LET},
+        };
 
-    if (keywords.ContainsKey(literal))
-    {
-        return keywords[literal];
+        if (keywords.ContainsKey(literal))
+        {
+            return keywords[literal];
+        }
+
+        return TokenType.Identifier;
     }
-
-    return TokenType.Identifier;
-}
 }
 
 //otra forma de hacer el metodo de lookup_token_type, sin tener que meterlo dentro de la clase token

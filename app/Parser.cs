@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using static Token;
 using static TokenType;
 
-
-
-
 public class Parser
 {
     private readonly Lexer lexer;
@@ -37,11 +34,11 @@ public class Parser
         {
             if (currentToken.Type == TokenType.Identifier)
             {
-                Console.WriteLine($"Found identifier: {currentToken.Lexeme}");
+                Console.WriteLine($"Found Identifier: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.IntegerLiteral)
             {
-                Console.WriteLine($"Found integer literal: {currentToken.Lexeme}");
+                Console.WriteLine($"Found Integer : {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.And)
             {
@@ -110,6 +107,34 @@ public class Parser
             else if (currentToken.Type==TokenType.IF)
             {
                 Console.WriteLine($"found if statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.ELSE)
+            {
+                Console.WriteLine($"found else statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.TRUE)
+            {
+                Console.WriteLine($"found true statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.RETURN)
+            {
+                Console.WriteLine($"found return statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.FUNCTION)
+            {
+                Console.WriteLine($"found function statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.FALSE)
+            {
+                Console.WriteLine($"found false statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.SLASH)
+            {
+                Console.WriteLine($"found slash statement: {currentToken.Lexeme}");
+            }
+            else if (currentToken.Type==TokenType.MULTIPLICATION)
+            {
+                Console.WriteLine($"found multiplication statement: {currentToken.Lexeme}");
             }
             else
             {
