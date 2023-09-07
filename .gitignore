@@ -5,6 +5,7 @@
 *.sln.docstates
 bin/
 obj/
+.vscode/
 
 # Build results
 
