@@ -2,13 +2,74 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//token
 using static Token;
 using static TokenType;
+//ast
+using static Program;
+using static Statement; 
+using static Expression;
+using static ExpressionStatement;
+using static Function;
+using static Identifier;   
+using static If;
+using static Infix;
+using static Inte;
+using static LetStatement;
+using static Prefix;
+using static ReturnStatement;
+using static Block;
+using static Boolean;
+using static Call;
+//lexer
+using static Lexer;
+
+public delegate Expression PrefixParseFn();
+public delegate Expression InfixParseFn(Expression left);
+
+public enum Precedence
+{
+    LOWEST = 1,
+    EQUALS = 2,
+    LESSGREATER = 3,
+    SUM = 4,
+    PRODUCT = 5,
+    PREFIX = 6,
+    CALL = 7
+}
+
+public class PrecedenceDemo
+{
+    // Definir el diccionario PRECEDENCES como una propiedad estática
+    private static readonly Dictionary<TokenType, Precedence> PRECEDENCES = new Dictionary<TokenType, Precedence>
+    {
+        { TokenType.Equals, Precedence.EQUALS },
+        { TokenType.ASSING, Precedence.EQUALS },
+        { TokenType.LT, Precedence.LESSGREATER },
+        { TokenType.GT, Precedence.LESSGREATER },
+        { TokenType.PLUS, Precedence.SUM },
+        { TokenType.MINUS, Precedence.SUM },
+        { TokenType.SLASH, Precedence.PRODUCT },
+        { TokenType.MULTIPLICATION, Precedence.PRODUCT },
+        { TokenType.LPAREN, Precedence.CALL }
+    };
+}
 
 public class Parser
 {
+    private Dictionary<TokenType, PrefixParseFn> PrefixParseFns = new Dictionary<TokenType, PrefixParseFn>();
+    private Dictionary<TokenType, InfixParseFn> InfixParseFns = new Dictionary<TokenType, InfixParseFn>();
     private readonly Lexer lexer;
     private Token currentToken;
+
+    public void RegisterPrefix(TokenType tokenType, PrefixParseFn prefixFn)
+    {
+        PrefixParseFns[tokenType] = prefixFn;
+    }
+    public void RegisterInfix(TokenType tokenType, InfixParseFn infixFn)
+    {
+        InfixParseFns[tokenType] = infixFn;
+    }
 
     public Parser(Lexer lexer)
     {
@@ -106,35 +167,35 @@ public class Parser
             }
             else if (currentToken.Type==TokenType.IF)
             {
-                Console.WriteLine($"found if statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found if statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.ELSE)
             {
-                Console.WriteLine($"found else statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found else statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.TRUE)
             {
-                Console.WriteLine($"found true statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found true statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.RETURN)
             {
-                Console.WriteLine($"found return statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found return statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.FUNCTION)
             {
-                Console.WriteLine($"found function statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found function statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.FALSE)
             {
-                Console.WriteLine($"found false statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found false statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.SLASH)
             {
-                Console.WriteLine($"found slash statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found slash statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.MULTIPLICATION)
             {
-                Console.WriteLine($"found multiplication statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Found multiplication statement: {currentToken.Lexeme}");
             }
             else
             {
