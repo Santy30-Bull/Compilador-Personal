@@ -7,6 +7,8 @@ bin/
 obj/
 .vscode/
 app/.vscode/*
+app.csproj
+app.sln
 
 # Build results
 
