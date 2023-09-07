@@ -1,5 +1,5 @@
 # Compilador-Personal
-(Aclaracion MUY IMPORTANTE: El parser es en realidad el lexer, y el lexer es el parser)
+
 Para lograr una ejecución exitosa del código, es necesario realizar algunas preparaciones previas:
 
 🔧 Asegúrate de tener instalado **.NET 8**; versiones anteriores al **8** no son compatibles. 🚀
