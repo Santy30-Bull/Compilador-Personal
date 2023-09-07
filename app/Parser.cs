@@ -95,111 +95,111 @@ public class Parser
         {
             if (currentToken.Type == TokenType.Identifier)
             {
-                Console.WriteLine($"Found Identifier: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Identifier: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.IntegerLiteral)
             {
-                Console.WriteLine($"Found Integer : {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Integer : {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.And)
             {
-                Console.WriteLine($"Found AND operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró AND operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.Equals)
             {
-                Console.WriteLine($"Found equals operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Equals operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.LT)
             {
-                Console.WriteLine($"Found less-than operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Less-than operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.GT)
             {
-                Console.WriteLine($"Found greater-than operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Greater-than operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.LPAREN)
             {
-                Console.WriteLine($"Found left parenthesis: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Left parenthesis: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.RPAREN)
             {
-                Console.WriteLine($"Found right parenthesis: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Right parenthesis: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.LBRACE)
             {
-                Console.WriteLine($"Found left brace: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Left brace: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.RBRACE)
             {
-                Console.WriteLine($"Found right brace: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Right brace: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.SEMICOLON)
             {
-                Console.WriteLine($"Found semicolon: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Semicolon: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.PLUS)
             {
-                Console.WriteLine($"Found plus operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Plus operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.NEGATION)
             {
-                Console.WriteLine($"Found Negation operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Negation operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.LTE)
             {
-                Console.WriteLine($"Found less-than-equals operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Less-than-Equals operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.GTE)
             {
-                Console.WriteLine($"Found greater-than-equals operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Greater-than-Equals operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.ASSING)
             {
-                Console.WriteLine($"Found assignment operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Assignment operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.COMMA)
             {
-                Console.WriteLine($"Found comma: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Comma: {currentToken.Lexeme}");
             }
             else if (currentToken.Type == TokenType.MINUS)
             {
-                Console.WriteLine($"Found minus operator: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Minus operator: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.IF)
             {
-                Console.WriteLine($"Found if statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró If statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.ELSE)
             {
-                Console.WriteLine($"Found else statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Else statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.TRUE)
             {
-                Console.WriteLine($"Found true statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró True statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.RETURN)
             {
-                Console.WriteLine($"Found return statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Return statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.FUNCTION)
             {
-                Console.WriteLine($"Found function statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Function statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.FALSE)
             {
-                Console.WriteLine($"Found false statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró False statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.SLASH)
             {
-                Console.WriteLine($"Found slash statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Slash statement: {currentToken.Lexeme}");
             }
             else if (currentToken.Type==TokenType.MULTIPLICATION)
             {
-                Console.WriteLine($"Found multiplication statement: {currentToken.Lexeme}");
+                Console.WriteLine($"Se encontró Multiplication statement: {currentToken.Lexeme}");
             }
             else
             {
-                Console.WriteLine($"Found illegal token: {currentToken.Lexeme} ");
+                Console.WriteLine($"No se encontro ningun token (illegal token) : {currentToken.Lexeme} ");
             }
 
             currentToken = lexer.NextToken();
