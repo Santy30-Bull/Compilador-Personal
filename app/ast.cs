@@ -5,10 +5,12 @@ using System.Linq;
 using static Token;
 using static TokenType;
 
+namespace ast{
 public abstract class ASTNode
 {
     public abstract string TokenLiteral();
     public abstract override string ToString();
+
 }
 
 public class Statement : ASTNode
@@ -296,6 +298,7 @@ public class Call : Expression
         string argList = string.Join(", ", Arguments.Select(a => a.ToString()));
         return $"{Function}({argList})";
     }
+}
 }
 
 

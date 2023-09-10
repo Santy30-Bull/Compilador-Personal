@@ -6,21 +6,7 @@ using System.Threading.Tasks;
 using static Token;
 using static TokenType;
 //ast
-using static Program;
-using static Statement; 
-using static Expression;
-using static ExpressionStatement;
-using static Function;
-using static Identifier;   
-using static If;
-using static Infix;
-using static Inte;
-using static LetStatement;
-using static Prefix;
-using static ReturnStatement;
-using static Block;
-using static Boolean;
-using static Call;
+using ast;
 //lexer
 using static Lexer;
 
@@ -201,7 +187,6 @@ public class Parser
             {
                 Console.WriteLine($"No se encontro ningun token (illegal token) : {currentToken.Lexeme} ");
             }
-
             currentToken = lexer.NextToken();
         }
     }

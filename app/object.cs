@@ -19,7 +19,7 @@ public abstract class Object
 
 public class Integer : Object
 {
-    private int value;
+    public int value;
 
     public Integer(int value)
     {
