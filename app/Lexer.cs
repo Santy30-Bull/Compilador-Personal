@@ -14,7 +14,7 @@ public class Lexer
     private int _readPosition;
 
 
- public Lexer(string input)
+public Lexer(string input)
 {
     this.input = input;
     position = 0;
@@ -141,36 +141,12 @@ public class Lexer
             string literal = ReadNumber();
             return new Token(TokenType.IntegerLiteral, literal);
         }
-        
+
         //aqui se hacen las palabras reservadas
         else if (EsLetra(_character))
         {
-            string literal = ReadIdentifier();
-            if (literal.Length == 3 && literal[0] == 'n' && literal[1] == 'e' && literal[2] == 'l')
-            {
-                return new Token(TokenType.FALSE, "nel");
-            }
-            else if (literal.Length == 3 && literal[0] == 's' && literal[1] == 'z' && literal[2] == 's')
-            {
-                return new Token(TokenType.TRUE, "szs");
-            }
-            else if (literal.Length == 2 && literal[0] == 's' && literal[1] == 'i')
-            {
-                return new Token(TokenType.IF, "si");
-            }
-            else if (literal.Length == 4 && literal[0] == 's' && literal[1] == 'i' && literal[2] == 'n' && literal[3] == 'o')
-            {
-                return new Token(TokenType.ELSE, "sino");
-            }
-            else if (literal.Length == 7 && literal[0] == 'r' && literal[1] == 'e' && literal[2] == 'g' && literal[3] == 'r' && literal[4] == 'e' && literal[5] == 's' && literal[6] == 'a')
-            {
-                return new Token(TokenType.RETURN, "regresa");
-            }
-            else if (literal.Length == 13 && literal[0] == 'p' && literal[1] == 'r' && literal[2] == 'o' && literal[3] == 'c' && literal[4] == 'e' && literal[5] == 'd' && literal[6] == 'i' && literal[7] == 'm' && literal[8] == 'i' && literal[9] == 'e' && literal[10] == 'n' && literal[11] == 't' && literal[12] == 'o')
-            {
-                return new Token(TokenType.FUNCTION, "procedimiento");
-            }
-            TokenType tokenType = lookup_token_type(literal);
+            string literal = ReadIdentifier(); // Leer el identificador completo
+            TokenType tokenType = lookup_token_type(literal); // Comprobar si es una palabra reservada
             return new Token(tokenType, literal);
         }
         else
@@ -224,17 +200,18 @@ public class Lexer
         _readPosition++;
     }
 
-    private string ReadIdentifier()
+   private string ReadIdentifier()
+{
+    int start = position;
+    
+    while (EsLetra(CurrentChar) || char.IsDigit(CurrentChar))
     {
-        int initialPosition = position;
-
-        while (EsLetra(_character))
-        {
-            ReadCharacter();
-        }
-
-        return input.Substring(initialPosition, position - initialPosition);
+        Advance();
     }
+    
+    return input.Substring(start, position - start);
+}
+
 
     private string ReadNumber()
     {
