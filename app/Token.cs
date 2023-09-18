@@ -31,6 +31,7 @@ public enum TokenType
     RETURN,
     SLASH,
     IF,
+    LET,
     MULTIPLICATION,
     ELSE
 }
@@ -58,7 +59,7 @@ public class Token
             {"regresa", TokenType.RETURN},
             {"si", TokenType.IF},
             {"sino", TokenType.ELSE},
-            //{"variable", TokenType.LET},
+            {"variable", TokenType.LET},
         };
 
         if (keywords.ContainsKey(literal))
