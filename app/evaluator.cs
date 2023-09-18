@@ -41,7 +41,7 @@ public class Evaluator
     {
         return value ? Constants.TRUE : Constants.FALSE;
     }
-public static object EvaluateMinusOperatorExpression(object right)
+public static object? EvaluateMinusOperatorExpression(object right)
 {
     if (!(right is Integer))
     {
@@ -53,7 +53,7 @@ public static object EvaluateMinusOperatorExpression(object right)
     return new Integer(-integerRight?.value ?? 0); // Usamos 0 como valor predeterminado
 }
 
-public static object EvaluatePrefixExpression(string operador, object right)
+public static object? EvaluatePrefixExpression(string operador, object right)
 {
     if (operador == "!")
     {
@@ -117,7 +117,7 @@ public static object EvaluateInfixExpression(string operador, object left, objec
     }
     return Constants.NULL;
 }
-public static object Evaluate(ast.ASTNode node)
+public static object? Evaluate(ast.ASTNode node)
     {
         Type nodeType = node.GetType();
 
@@ -148,7 +148,7 @@ public static object Evaluate(ast.ASTNode node)
         {
             ast.Prefix prefixNode = (ast.Prefix)node;
             Contract.Assert(prefixNode.Right != null);
-            object right = Evaluate(prefixNode.Right);
+            object? right = Evaluate(prefixNode.Right);
             Contract.Assert(right != null);
             return EvaluatePrefixExpression(prefixNode.Operator, right);
         }
@@ -156,8 +156,8 @@ public static object Evaluate(ast.ASTNode node)
         {
             ast.Infix infixNode = (ast.Infix)node;
             Contract.Assert(infixNode.Left != null && infixNode.Right != null);
-            object left = Evaluate(infixNode.Left);
-            object right = Evaluate(infixNode.Right);
+            object? left = Evaluate(infixNode.Left);
+            object? right = Evaluate(infixNode.Right);
             Contract.Assert(left != null && right != null);
             return EvaluateInfixExpression(infixNode.Operator, left, right);
         }
@@ -174,9 +174,9 @@ public static object Evaluate(ast.ASTNode node)
         return null;
     }
 
-public static object EvaluateStatements(List<ast.Statement> statements)
+public static object? EvaluateStatements(List<ast.Statement> statements)
 {
-    object result = null;
+    object? result = null;
     foreach (var statement in statements)
     {
         result = Evaluate(statement);
@@ -185,25 +185,25 @@ public static object EvaluateStatements(List<ast.Statement> statements)
 }
 public static bool IsTruthy(object obj)
 {
-    if (object.ReferenceEquals(obj, Constants.NULL))
+    if (object.Equals(obj, Constants.NULL))
     {
         return false;
     }
-    else if (object.ReferenceEquals(obj, Constants.TRUE))
+    else if (object.Equals(obj, Constants.TRUE))
     {
         return true;
     }
-    else if (object.ReferenceEquals(obj, Constants.FALSE))
+    else if (object.Equals(obj, Constants.FALSE))
     {
         return false;
     }
     return true;
 }
-public static object EvaluateIfExpression(ast.If ifExpression)
+public static object? EvaluateIfExpression(ast.If ifExpression)
 {
     if (ifExpression != null)
     {
-        object condition = Evaluate(ifExpression.Condition);
+        object? condition = Evaluate(ifExpression.Condition);
         if (condition != null && IsTruthy(condition))
         {
             if (ifExpression.Consequence != null)
@@ -219,7 +219,3 @@ public static object EvaluateIfExpression(ast.If ifExpression)
     return Constants.NULL;
 }
 }
-
-
-
-
