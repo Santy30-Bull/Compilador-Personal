@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "5QhMF9of/twnnZlLOI4/9Okdj1MHfDIlgIaQwwJpsIywrMILPIFwiWOGBwh9C6PEs8Bj+Q/061lT6zhUtUW+0g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pedro\\Desktop\\Compilador con logica (1)\\app.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pedro\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.9\\microsoft.netcore.app.ref.7.0.9.nupkg.sha512",
+    "C:\\Users\\pedro\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.9\\microsoft.windowsdesktop.app.ref.7.0.9.nupkg.sha512",
+    "C:\\Users\\pedro\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.9\\microsoft.aspnetcore.app.ref.7.0.9.nupkg.sha512",
+    "C:\\Users\\pedro\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.9\\microsoft.netcore.app.host.win-x64.7.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}
