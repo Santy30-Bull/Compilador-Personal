@@ -7,7 +7,7 @@ class MainClass
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Bienvenido al evaluador de funciones en C#.");
+        Console.WriteLine("Bienvenido al compilador mas sapa perra de este planeta.");
 
         while (true)
         {

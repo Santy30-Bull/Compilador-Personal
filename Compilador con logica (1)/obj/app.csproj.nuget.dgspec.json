@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro\\Desktop\\Compilador con logica (1)\\app.csproj": {}
+    "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\Compilador con logica (1)\\app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro\\Desktop\\Compilador con logica (1)\\app.csproj": {
+    "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\Compilador con logica (1)\\app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro\\Desktop\\Compilador con logica (1)\\app.csproj",
+        "projectUniqueName": "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\Compilador con logica (1)\\app.csproj",
         "projectName": "app",
-        "projectPath": "C:\\Users\\pedro\\Desktop\\Compilador con logica (1)\\app.csproj",
-        "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro\\Desktop\\Compilador con logica (1)\\obj\\",
+        "projectPath": "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\Compilador con logica (1)\\app.csproj",
+        "packagesPath": "C:\\Users\\SANTY\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SANTY\\OneDrive\\Escritorio\\Lenguaje y compiladores\\Compilador-Personal\\Compilador con logica (1)\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\SANTY\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           ".net7"
