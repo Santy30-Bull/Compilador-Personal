@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 class MainClass
 {
@@ -61,7 +60,55 @@ class MainClass
         try
         {
             var tokens = Tokenize(expresion);
-            return EvaluarTokens(tokens, x);
+
+            double resultado = 0;
+            double operando = 0;
+            string operador = "+";
+
+            foreach (var token in tokens)
+            {
+                if (double.TryParse(token, out double valor))
+                {
+                    operando = valor;
+
+                    if (operador == "+")
+                        resultado += operando;
+                    else if (operador == "-")
+                        resultado -= operando;
+                    else if (operador == "*")
+                        resultado *= operando;
+                    else if (operador == "/")
+                    {
+                        if (operando != 0)
+                            resultado /= operando;
+                        else
+                            throw new DivideByZeroException("División por cero.");
+                    }
+                }
+                else if (EsOperador(token))
+                {
+                    operador = token;
+                }
+                else if (token == "x")
+                {
+                    operando = x;
+
+                    if (operador == "+")
+                        resultado += operando;
+                    else if (operador == "-")
+                        resultado -= operando;
+                    else if (operador == "*")
+                        resultado *= operando;
+                    else if (operador == "/")
+                    {
+                        if (operando != 0)
+                            resultado /= operando;
+                        else
+                            throw new DivideByZeroException("División por cero.");
+                    }
+                }
+            }
+            return resultado;
         }
         catch (Exception e)
         {
@@ -69,71 +116,39 @@ class MainClass
         }
     }
 
-    static double EvaluarTokens(List<string> tokens, double x)
-{
-    double resultado = 0;
-    string operador = "+";
-    
-    foreach (var token in tokens)
-    {
-        if (double.TryParse(token, out double valor))
-        {
-            if (operador == "+")
-                resultado += valor;
-            else if (operador == "-")
-                resultado -= valor;
-            else if (operador == "*")
-                resultado *= valor;
-            else if (operador == "/")
-            {
-                if (valor != 0)
-                    resultado /= valor;
-                else
-                    throw new DivideByZeroException("División por cero.");
-            }
-        }
-        else if (token == "+")
-        {
-            operador = "+";
-        }
-        else if (token == "-")
-        {
-            operador = "-";
-        }
-        else if (token == "*")
-        {
-            operador = "*";
-        }
-        else if (token == "/")
-        {
-            operador = "/";
-        }
-        else if (token == "x")
-        {
-            // Instead of directly adding 'x', multiply it by the current result
-            resultado *= x;
-        }
-    }
-    
-    return resultado;
-}
-
-
     static List<string> Tokenize(string expresion)
     {
-        // Tokenize by operators, parentheses, and whitespace
-        var operators = new[] { "+", "-", "*", "/", "(", ")" };
-        var tokens = expresion.Split(operators, StringSplitOptions.RemoveEmptyEntries)
-            .SelectMany((s, i) => i < expresion.Length - 1 ? new[] { s, expresion.Substring(i, 1) } : new[] { s })
-            .Select(s => s.Trim())
-            .Where(s => !string.IsNullOrWhiteSpace(s))
-            .ToList();
+        var tokens = new List<string>();
+        string actual = "";
 
-        // Adding spaces around operators to simplify tokenization
-        expresion = expresion.Replace("+", " + ").Replace("-", " - ").Replace("*", " * ").Replace("/", " / ");
-        tokens = expresion.Split(' ').Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+        foreach (var caracter in expresion)
+        {
+            if (EsOperador(caracter.ToString()))
+            {
+                if (!string.IsNullOrEmpty(actual))
+                {
+                    tokens.Add(actual);
+                    actual = "";
+                }
+                tokens.Add(caracter.ToString());
+            }
+            else
+            {
+                actual += caracter;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(actual))
+        {
+            tokens.Add(actual);
+        }
 
         return tokens;
+    }
+
+    static bool EsOperador(string token)
+    {
+        return token == "+" || token == "-" || token == "*" || token == "/";
     }
 
     static double EvaluarExpresionConArgumento(string entrada)
