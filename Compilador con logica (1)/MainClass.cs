@@ -61,54 +61,47 @@ class MainClass
         {
             var tokens = Tokenize(expresion);
 
-            double resultado = 0;
-            double operando = 0;
-            string operador = "+";
+            Stack<double> numeros = new Stack<double>();
+            Stack<string> operadores = new Stack<string>();
 
             foreach (var token in tokens)
             {
                 if (double.TryParse(token, out double valor))
                 {
-                    operando = valor;
-
-                    if (operador == "+")
-                        resultado += operando;
-                    else if (operador == "-")
-                        resultado -= operando;
-                    else if (operador == "*")
-                        resultado *= operando;
-                    else if (operador == "/")
-                    {
-                        if (operando != 0)
-                            resultado /= operando;
-                        else
-                            throw new DivideByZeroException("División por cero.");
-                    }
+                    numeros.Push(valor);
                 }
                 else if (EsOperador(token))
                 {
-                    operador = token;
+                    while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
+                    {
+                        RealizarOperacion(numeros, operadores);
+                    }
+                    operadores.Push(token);
+                }
+                else if (token == "(")
+                {
+                    operadores.Push(token);
+                }
+                else if (token == ")")
+                {
+                    while (operadores.Count > 0 && operadores.Peek() != "(")
+                    {
+                        RealizarOperacion(numeros, operadores);
+                    }
+                    operadores.Pop(); // Quitamos el paréntesis izquierdo
                 }
                 else if (token == "x")
                 {
-                    operando = x;
-
-                    if (operador == "+")
-                        resultado += operando;
-                    else if (operador == "-")
-                        resultado -= operando;
-                    else if (operador == "*")
-                        resultado *= operando;
-                    else if (operador == "/")
-                    {
-                        if (operando != 0)
-                            resultado /= operando;
-                        else
-                            throw new DivideByZeroException("División por cero.");
-                    }
+                    numeros.Push(x);
                 }
             }
-            return resultado;
+
+            while (operadores.Count > 0)
+            {
+                RealizarOperacion(numeros, operadores);
+            }
+
+            return numeros.Pop();
         }
         catch (Exception e)
         {
@@ -123,7 +116,7 @@ class MainClass
 
         foreach (var caracter in expresion)
         {
-            if (EsOperador(caracter.ToString()))
+            if (EsOperador(caracter.ToString()) || caracter == '(' || caracter == ')')
             {
                 if (!string.IsNullOrEmpty(actual))
                 {
@@ -149,6 +142,47 @@ class MainClass
     static bool EsOperador(string token)
     {
         return token == "+" || token == "-" || token == "*" || token == "/";
+    }
+
+    static int Prioridad(string operador)
+    {
+        switch (operador)
+        {
+            case "+":
+            case "-":
+                return 1;
+            case "*":
+            case "/":
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    static void RealizarOperacion(Stack<double> numeros, Stack<string> operadores)
+    {
+        double b = numeros.Pop();
+        double a = numeros.Pop();
+        string operador = operadores.Pop();
+
+        switch (operador)
+        {
+            case "+":
+                numeros.Push(a + b);
+                break;
+            case "-":
+                numeros.Push(a - b);
+                break;
+            case "*":
+                numeros.Push(a * b);
+                break;
+            case "/":
+                if (b != 0)
+                    numeros.Push(a / b);
+                else
+                    throw new DivideByZeroException("División por cero.");
+                break;
+        }
     }
 
     static double EvaluarExpresionConArgumento(string entrada)
