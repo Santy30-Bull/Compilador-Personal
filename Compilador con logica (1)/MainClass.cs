@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 class MainClass
 {
-    static Dictionary<string, Func<double, double>> funciones = new Dictionary<string, Func<double, double>>();
+    static Dictionary<string, Func<double, double, double, double>> funciones = new Dictionary<string, Func<double, double, double, double>>();
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Bienvenido al compilador mas sapa perra de este planeta.");
+        Console.WriteLine("Bienvenido al compilador.");
 
         while (true)
         {
@@ -25,7 +25,7 @@ class MainClass
                     string expresion = partes[1].Trim();
                     try
                     {
-                        funciones[nombre] = x => EvaluarExpresion(expresion, x);
+                        funciones[nombre] = (x, y, z) => EvaluarExpresion(expresion, x, y, z);
                         Console.WriteLine($"Función '{nombre}' asignada.");
                     }
                     catch (Exception e)
@@ -54,60 +54,82 @@ class MainClass
 
         Console.WriteLine("Saliendo del programa.");
     }
-
-    static double EvaluarExpresion(string expresion, double x)
+static double EvaluarExpresion(string expresion, double x, double y, double z)
+{
+    try
     {
-        try
+        var tokens = Tokenize(expresion);
+
+        Stack<double> numeros = new Stack<double>();
+        Stack<string> operadores = new Stack<string>();
+
+        foreach (var token in tokens)
         {
-            var tokens = Tokenize(expresion);
-
-            Stack<double> numeros = new Stack<double>();
-            Stack<string> operadores = new Stack<string>();
-
-            foreach (var token in tokens)
+            if (double.TryParse(token, out double valor))
             {
-                if (double.TryParse(token, out double valor))
+                numeros.Push(valor);
+            }
+            else if (EsOperador(token))
+            {
+                while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
                 {
-                    numeros.Push(valor);
+                    RealizarOperacion(numeros, operadores);
                 }
-                else if (EsOperador(token))
+                operadores.Push(token);
+            }
+            else if (token == "(")
+            {
+                operadores.Push(token);
+            }
+            else if (token == ")")
+            {
+                while (operadores.Count > 0 && operadores.Peek() != "(")
                 {
-                    while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
-                    {
-                        RealizarOperacion(numeros, operadores);
-                    }
-                    operadores.Push(token);
+                    RealizarOperacion(numeros, operadores);
                 }
-                else if (token == "(")
+                if (operadores.Count > 0 && operadores.Peek() == "(")
                 {
-                    operadores.Push(token);
+                    operadores.Pop(); // Retira el paréntesis izquierdo
                 }
-                else if (token == ")")
+                else
                 {
-                    while (operadores.Count > 0 && operadores.Peek() != "(")
-                    {
-                        RealizarOperacion(numeros, operadores);
-                    }
-                    operadores.Pop(); // Quitamos el paréntesis izquierdo
-                }
-                else if (token == "x")
-                {
-                    numeros.Push(x);
+                    throw new Exception("Expresión no válida. Paréntesis desequilibrados.");
                 }
             }
-
-            while (operadores.Count > 0)
+            else if (token == "x")
             {
-                RealizarOperacion(numeros, operadores);
+                numeros.Push(x);
             }
+            else if (token == "y")
+            {
+                numeros.Push(y);
+            }
+            else if (token == "z")
+            {
+                numeros.Push(z);
+            }
+        }
 
+        while (operadores.Count > 0)
+        {
+            RealizarOperacion(numeros, operadores);
+        }
+
+        if (numeros.Count == 1)
+        {
             return numeros.Pop();
         }
-        catch (Exception e)
+        else
         {
-            throw new Exception($"Error al evaluar la expresión: {e.Message}");
+            throw new Exception("Expresión no válida. No se evaluó completamente.");
         }
     }
+    catch (Exception e)
+    {
+        throw new Exception($"Error al evaluar la expresión: {e.Message}");
+    }
+}
+
 
     static List<string> Tokenize(string expresion)
     {
@@ -186,21 +208,29 @@ class MainClass
     }
 
     static double EvaluarExpresionConArgumento(string entrada)
+{
+    var partes = entrada.Split('(', ')');
+    if (partes.Length != 3)
+        throw new ArgumentException("Formato de entrada no válido.");
+
+    string nombre = partes[0].Trim();
+    string[] argumentos = partes[1].Split(',');
+
+    if (argumentos.Length != 3)
+        throw new ArgumentException("Número incorrecto de argumentos.");
+
+    double arg1 = double.Parse(argumentos[0]);
+    double arg2 = double.Parse(argumentos[1]);
+    double arg3 = double.Parse(argumentos[2]);
+
+    if (funciones.ContainsKey(nombre))
     {
-        var partes = entrada.Split('(', ')');
-        if (partes.Length != 3)
-            throw new ArgumentException("Formato de entrada no válido.");
-
-        string nombre = partes[0].Trim();
-        double argumento = double.Parse(partes[1]);
-
-        if (funciones.ContainsKey(nombre))
-        {
-            return funciones[nombre](argumento);
-        }
-        else
-        {
-            throw new ArgumentException($"La función '{nombre}' no está definida.");
-        }
+        return funciones[nombre](arg1, arg2, arg3);
     }
+    else
+    {
+        throw new ArgumentException($"La función '{nombre}' no está definida.");
+    }
+}
+
 }
