@@ -273,7 +273,7 @@ public Lexer(string input)
         }
         
     }
-    //hello
+    //hello, hello
 
     private bool EsLetra(char character)
     {

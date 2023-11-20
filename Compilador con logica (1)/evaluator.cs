@@ -173,7 +173,7 @@ public static object? Evaluate(ast.ASTNode node)
         }
         return null;
     }
-//hello
+//hello, hello
 public static object? EvaluateStatements(List<ast.Statement> statements)
 {
     object? result = null;
