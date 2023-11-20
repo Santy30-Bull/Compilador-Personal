@@ -4,6 +4,7 @@ using System.Collections.Generic;
 class MainClass
 {
     static Dictionary<string, Func<double, double, double, double>> funciones = new Dictionary<string, Func<double, double, double, double>>();
+    static HashSet<string> constantes = new HashSet<string>();
 
     static void Main(string[] args)
     {
@@ -23,15 +24,15 @@ class MainClass
                 {
                     string nombre = partes[0].Trim();
                     string expresion = partes[1].Trim();
-                    try
+                    
+                    if (constantes.Contains(nombre))
                     {
-                        funciones[nombre] = (x, y, z) => EvaluarExpresion(expresion, x, y, z);
-                        Console.WriteLine($"Función '{nombre}' asignada.");
+                        Console.WriteLine($"La variable '{nombre}' ya se ha asignado como constante.");
+                        continue;
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"Error al asignar la función: {e.Message}");
-                    }
+
+                    funciones[nombre] = (x, y, z) => EvaluarExpresion(expresion, x, y, z);
+                    Console.WriteLine($"Función '{nombre}' asignada.");
                 }
                 else
                 {
@@ -205,32 +206,50 @@ static double EvaluarExpresion(string expresion, double x, double y, double z)
                     throw new DivideByZeroException("División por cero.");
                 break;
         }
-    }
-
-    static double EvaluarExpresionConArgumento(string entrada)
-{
-    var partes = entrada.Split('(', ')');
-    if (partes.Length != 3)
-        throw new ArgumentException("Formato de entrada no válido.");
-
-    string nombre = partes[0].Trim();
-    string[] argumentos = partes[1].Split(',');
-
-    if (argumentos.Length != 3)
-        throw new ArgumentException("Número incorrecto de argumentos.");
-
-    double arg1 = double.Parse(argumentos[0]);
-    double arg2 = double.Parse(argumentos[1]);
-    double arg3 = double.Parse(argumentos[2]);
-
-    if (funciones.ContainsKey(nombre))
+    }static double EvaluarExpresionConArgumento(string entrada)
     {
-        return funciones[nombre](arg1, arg2, arg3);
-    }
-    else
-    {
-        throw new ArgumentException($"La función '{nombre}' no está definida.");
-    }
+        var partes = entrada.Split('(', ')');
+        if (partes.Length != 3)
+            throw new ArgumentException("Formato de entrada no válido.");
+
+        string nombre = partes[0].Trim();
+        string[] argumentos = partes[1].Split(',');
+
+        double arg1 = 0.0, arg2 = 0.0, arg3 = 0.0;
+
+        if (argumentos.Length != 3)
+        {
+            if (argumentos.Length == 1)
+            {
+                arg1 = double.Parse(argumentos[0]);
+            }
+            else if (argumentos.Length == 2)
+            {
+                arg1 = double.Parse(argumentos[0]);
+                arg2 = double.Parse(argumentos[1]);
+            }
+        }
+        else
+        {
+            arg1 = double.Parse(argumentos[0]);
+            arg2 = double.Parse(argumentos[1]);
+            arg3 = double.Parse(argumentos[2]);
+        }
+
+        if (funciones.ContainsKey(nombre))
+        {
+            return funciones[nombre](arg1, arg2, arg3);
+        }
+        else
+        {
+            if (constantes.Contains(nombre))
+            {
+                throw new ArgumentException($"La variable '{nombre}' es una constante y no se puede evaluar como función.");
+            }
+            else
+            {
+                throw new ArgumentException($"La función o variable '{nombre}' no está definida.");
+            }
+        }
 }
-
 }
