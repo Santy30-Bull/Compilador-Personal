@@ -9,6 +9,8 @@ obj/
 app/.vscode/*
 app/app.csproj
 app/app.sln
+*.csproj
+*.sln
 
 # Build results
 
