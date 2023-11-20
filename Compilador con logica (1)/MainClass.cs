@@ -7,7 +7,7 @@ class MainClass
 {
     static Dictionary<string, Func<double, double, double, double>> funciones = new Dictionary<string, Func<double, double, double, double>>();
     static HashSet<string> constantes = new HashSet<string>();
-
+    static Dictionary<string, double> variables = new Dictionary<string, double>();
 
     static void Main(string[] args)
     {
@@ -102,6 +102,7 @@ class MainClass
                 try
                 {
                     double valor = EvaluarExpresion(entrada);
+                    variables.Add(entrada, valor);
                     Console.WriteLine($"Resultado: {valor}");
                 }
                 catch (Exception e)
@@ -111,101 +112,86 @@ class MainClass
             }
         }
 
+    static bool EsConstante(string expresion)
+    {
+        return double.TryParse(expresion, out _);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-        static bool EsConstante(string expresion)
+    static double EvaluarExpresion(string expresion, double? x = null, double? y = null, double? z = null)
+{
+    if (EsConstante(expresion))
+    {
+        // If it's a constant, simply return its value
+        return double.Parse(expresion);
+    }
+    else
+    {
+        try
         {
-            return double.TryParse(expresion, out _);
-        }
+            var tokens = Tokenize(expresion);
 
-        static double EvaluarExpresion(string expresion, double? x = null, double? y = null, double? z = null)
-        {
-            if (EsConstante(expresion))
+            Stack<double> numeros = new Stack<double>();
+            Stack<string> operadores = new Stack<string>();
+
+            foreach (var token in tokens)
             {
-                // Si es una constante, simplemente devolver su valor
-                return double.Parse(expresion);
-            }
-            else
-            {
-                try
+                if (double.TryParse(token, out double valor))
                 {
-                    var tokens = Tokenize(expresion);
-
-                    Stack<double> numeros = new Stack<double>();
-                    Stack<string> operadores = new Stack<string>();
-
-                    foreach (var token in tokens)
-                    {
-                        if (double.TryParse(token, out double valor))
-                        {
-                            numeros.Push(valor);
-                        }
-                        else if (EsOperador(token))
-                        {
-                            while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
-                            {
-                                RealizarOperacion(numeros, operadores);
-                            }
-                            operadores.Push(token);
-                        }
-                        else if (token == "(")
-                        {
-                            operadores.Push(token);
-                        }
-                        else if (token == ")")
-                        {
-                            while (operadores.Count > 0 && operadores.Peek() != "(")
-                            {
-                                RealizarOperacion(numeros, operadores);
-                            }
-                            if (operadores.Count > 0 && operadores.Peek() == "(")
-                            {
-                                operadores.Pop(); // Retira el paréntesis izquierdo
-                            }
-                            else
-                            {
-                                throw new Exception("Expresión no válida. Paréntesis desequilibrados.");
-                            }
-                        }
-                        else if (token == "x")
-                        {
-                            numeros.Push(x.GetValueOrDefault());
-                        }
-                        else if (token == "y")
-                        {
-                            numeros.Push(y.GetValueOrDefault());
-                        }
-                        else if (token == "z")
-                        {
-                            numeros.Push(z.GetValueOrDefault());
-                        }
-                    }
-
-                    while (operadores.Count > 0)
+                    numeros.Push(valor);
+                }
+                else if (EsOperador(token))
+                {
+                    while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
                     {
                         RealizarOperacion(numeros, operadores);
                     }
-
-                    return numeros.Pop();
-
+                    operadores.Push(token);
                 }
-                catch (Exception e)
+                else if (token == "(")
                 {
-                    throw new Exception($"Error al evaluar la expresión: {e.Message}");
+                    operadores.Push(token);
+                }
+                else if (token == ")")
+                {
+                    while (operadores.Count > 0 && operadores.Peek() != "(")
+                    {
+                        RealizarOperacion(numeros, operadores);
+                    }
+                    if (operadores.Count > 0 && operadores.Peek() == "(")
+                    {
+                        operadores.Pop(); // Remove the left parenthesis
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid expression. Unbalanced parentheses.");
+                    }
+                }
+                else
+                {
+                    if (!variables.ContainsKey(token))
+                    {
+                        Console.Write($"Enter value for variable '{token}': ");
+                        double variableValue = double.Parse(Console.ReadLine());
+                        variables.Add(token, variableValue);
+                    }
+                    numeros.Push(variables[token]);
                 }
             }
-        }
 
+            while (operadores.Count > 0)
+            {
+                RealizarOperacion(numeros, operadores);
+            }
+
+            return numeros.Pop();
+
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Error evaluating expression: {e.Message}");
+        }
+    }
+}
 
 
         static List<string> Tokenize(string expresion)
@@ -331,4 +317,3 @@ class MainClass
         }
     }
 }
-
