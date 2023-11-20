@@ -18,10 +18,9 @@ class MainClass
             Console.Write(">> ");
             string entrada = Console.ReadLine();
 
-            if (entrada == "opcion 2"){
-                
-           string input = Console.ReadLine() ?? ""; // Si Console.ReadLine() devuelve null, asigna una cadena vacía
-
+            if (entrada == "opcion 2")
+            {
+            string input = Console.ReadLine() ?? ""; // Si Console.ReadLine() devuelve null, asigna una cadena vacía
             if (string.IsNullOrWhiteSpace(input))
                 break;
 
@@ -33,15 +32,25 @@ class MainClass
             try
             {
                 double result = parser.Parse(); // Parse the tokens and get the result
-                Console.WriteLine("Resultado: " + result);
+                if(result == 1){
+                    Console.WriteLine("Resultado: " + true);
+                }
+                else if(result == 0){
+                    Console.WriteLine("Resultado: " + false);
+                }else{
+                    Console.WriteLine("Resultado: " + result);
+                }
+                    
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: " + e.Message);
             }
-        
-            }
 
+            //quiero que vuelve a pedir la entrada
+            continue;
+            }
+        
             if (entrada == "salir")
                 break;
             else if (entrada.Contains("="))
