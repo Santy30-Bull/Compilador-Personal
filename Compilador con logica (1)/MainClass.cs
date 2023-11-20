@@ -16,7 +16,7 @@ class MainClass
         while (true)
         {
             Console.Write(">> ");
-            string entrada = Console.ReadLine();
+            string entrada = Console.ReadLine()?.Trim() ?? "";
             if (entrada == "salir")
             {
                 break;
