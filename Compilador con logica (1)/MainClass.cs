@@ -64,16 +64,24 @@ class MainClass
                 {
                     string nombre = partes[0].Trim();
                     string expresion = partes[1].Trim();
-                    bool esConstante = IsConstant(expresion);
-                    if (esConstante)
+
+                    try
                     {
                         double valor = EvaluarExpresion(expresion);
-                        Console.WriteLine($"Funcion '{nombre}' ha sido asignada como una constante de valor {valor}.");
+                        if (funciones.ContainsKey(nombre))
+                        {
+                            funciones[nombre] = (x, y, z) => valor;
+                            Console.WriteLine($"Función '{nombre}' asignada.");
+                        }
+                        else
+                        {
+                            constantes.Add(nombre);
+                            Console.WriteLine($"Constante '{nombre}' ha sido asignada como valor {valor}.");
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        funciones[nombre] = (x, y, z) => EvaluarExpresion(expresion, x, y, z);
-                        Console.WriteLine($"Función '{nombre}' asignada.");
+                        Console.WriteLine($"Error al evaluar la expresión: {e.Message}");
                     }
                 }
             }
@@ -115,88 +123,86 @@ class MainClass
 
 
 
-        static bool IsConstant(string expresion)
+        static bool EsConstante(string expresion)
         {
-            // Check if the expression contains any variables
-            if (expresion.Contains("x") || expresion.Contains("y") || expresion.Contains("z"))
-            {
-                // If the expression contains a variable, it's not a constant
-                return false;
-            }
-            else
-            {
-                // If the expression doesn't contain a variable, it's a constant
-                return true;
-            }
+            return double.TryParse(expresion, out _);
         }
 
         static double EvaluarExpresion(string expresion, double? x = null, double? y = null, double? z = null)
         {
-            try
+            if (EsConstante(expresion))
             {
-                var tokens = Tokenize(expresion);
-
-                Stack<double> numeros = new Stack<double>();
-                Stack<string> operadores = new Stack<string>();
-
-                foreach (var token in tokens)
-                {
-                    if (double.TryParse(token, out double valor))
-                    {
-                        numeros.Push(valor);
-                    }
-                    else if (EsOperador(token))
-                    {
-                        while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
-                        {
-                            RealizarOperacion(numeros, operadores);
-                        }
-                        operadores.Push(token);
-                    }
-                    else if (token == "(")
-                    {
-                        operadores.Push(token);
-                    }
-                    else if (token == ")")
-                    {
-                        while (operadores.Count > 0 && operadores.Peek() != "(")
-                        {
-                            RealizarOperacion(numeros, operadores);
-                        }
-                        if (operadores.Count > 0 && operadores.Peek() == "(")
-                        {
-                            operadores.Pop(); // Retira el paréntesis izquierdo
-                        }
-                        else
-                        {
-                            throw new Exception("Expresión no válida. Paréntesis desequilibrados.");
-                        }
-                    }
-                    else if (token == "x")
-                    {
-                        numeros.Push(x.GetValueOrDefault());
-                    }
-                    else if (token == "y")
-                    {
-                        numeros.Push(y.GetValueOrDefault());
-                    }
-                    else if (token == "z")
-                    {
-                        numeros.Push(z.GetValueOrDefault());
-                    }
-                }
-
-                while (operadores.Count > 0)
-                {
-                    RealizarOperacion(numeros, operadores);
-                }
-
-                return numeros.Pop();
-
+                // Si es una constante, simplemente devolver su valor
+                return double.Parse(expresion);
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception($"Error al evaluar la expresión: {e.Message}");
+                try
+                {
+                    var tokens = Tokenize(expresion);
+
+                    Stack<double> numeros = new Stack<double>();
+                    Stack<string> operadores = new Stack<string>();
+
+                    foreach (var token in tokens)
+                    {
+                        if (double.TryParse(token, out double valor))
+                        {
+                            numeros.Push(valor);
+                        }
+                        else if (EsOperador(token))
+                        {
+                            while (operadores.Count > 0 && Prioridad(operadores.Peek()) >= Prioridad(token))
+                            {
+                                RealizarOperacion(numeros, operadores);
+                            }
+                            operadores.Push(token);
+                        }
+                        else if (token == "(")
+                        {
+                            operadores.Push(token);
+                        }
+                        else if (token == ")")
+                        {
+                            while (operadores.Count > 0 && operadores.Peek() != "(")
+                            {
+                                RealizarOperacion(numeros, operadores);
+                            }
+                            if (operadores.Count > 0 && operadores.Peek() == "(")
+                            {
+                                operadores.Pop(); // Retira el paréntesis izquierdo
+                            }
+                            else
+                            {
+                                throw new Exception("Expresión no válida. Paréntesis desequilibrados.");
+                            }
+                        }
+                        else if (token == "x")
+                        {
+                            numeros.Push(x.GetValueOrDefault());
+                        }
+                        else if (token == "y")
+                        {
+                            numeros.Push(y.GetValueOrDefault());
+                        }
+                        else if (token == "z")
+                        {
+                            numeros.Push(z.GetValueOrDefault());
+                        }
+                    }
+
+                    while (operadores.Count > 0)
+                    {
+                        RealizarOperacion(numeros, operadores);
+                    }
+
+                    return numeros.Pop();
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Error al evaluar la expresión: {e.Message}");
+                }
             }
         }
 
