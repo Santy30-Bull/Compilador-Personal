@@ -6,6 +6,7 @@ class MainClass
     static Dictionary<string, Func<double, double, double, double>> funciones = new Dictionary<string, Func<double, double, double, double>>();
     static HashSet<string> constantes = new HashSet<string>();
 
+
     static void Main(string[] args)
     {
         Console.WriteLine("Bienvenido al compilador.");
@@ -24,13 +25,6 @@ class MainClass
                 {
                     string nombre = partes[0].Trim();
                     string expresion = partes[1].Trim();
-                    
-                    if (constantes.Contains(nombre))
-                    {
-                        Console.WriteLine($"La variable '{nombre}' ya se ha asignado como constante.");
-                        continue;
-                    }
-
                     funciones[nombre] = (x, y, z) => EvaluarExpresion(expresion, x, y, z);
                     Console.WriteLine($"Función '{nombre}' asignada.");
                 }
@@ -164,7 +158,7 @@ static double EvaluarExpresion(string expresion, double x, double y, double z)
 
     static bool EsOperador(string token)
     {
-        return token == "+" || token == "-" || token == "*" || token == "/";
+        return token == "+" || token == "-" || token == "*" || token == "/" || token == "^";
     }
 
     static int Prioridad(string operador)
@@ -177,6 +171,8 @@ static double EvaluarExpresion(string expresion, double x, double y, double z)
             case "*":
             case "/":
                 return 2;
+            case "^":
+                return 3;
             default:
                 return 0;
         }
@@ -205,8 +201,12 @@ static double EvaluarExpresion(string expresion, double x, double y, double z)
                 else
                     throw new DivideByZeroException("División por cero.");
                 break;
+            case "^":
+                numeros.Push(Math.Pow(a, b));
+                break;
         }
-    }static double EvaluarExpresionConArgumento(string entrada)
+    }
+    static double EvaluarExpresionConArgumento(string entrada)
     {
         var partes = entrada.Split('(', ')');
         if (partes.Length != 3)
